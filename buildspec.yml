@@ -9,6 +9,6 @@ phases:
       -npm run build
     post_build:
       commands:
-        - aws s3 cp --recursive ./build s3://222.oncloudconsulting/
+        - aws s3 cp --recursive ./build s3://codepipeline-eu-north-1-596267752739/
         - aws cloudfront create-invalidation --distribution-id EBSCDGGY05VD1 --path /\*
   
