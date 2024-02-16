@@ -11,10 +11,11 @@ phases:
       commands:
         - aws s3 cp --recursive ./build s3://codepipeline-eu-north-1-596267752739/
         - aws cloudfront create-invalidation --distribution-id EBSCDGGY05VD1 --path /\*
-  artifacts:
-    files:
-      - '**/*'
-    base-directory: base_dir
-    name: build-artifact-name
-    discard-paths: no
-  
+artifacts:
+  # include all files required to run the application
+  files:
+    - public/**/*
+    - src/**/*
+    - package.json
+    - appspec.yml
+    - scripts/**/*
