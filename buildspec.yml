@@ -1,0 +1,14 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - npm install
+  build:
+    command:
+      -npm run build
+    post_build:
+      commands:
+        - aws s3 cp --recursive ./build s3://222.oncloudconsulting/
+        - aws cloudfront create-invalidation --distribution-id EBSCDGGY05VD1 --path /\*
+  
