@@ -1,38 +1,34 @@
 import './App.css';
-import UserDetails from './components/UserDetails';
-import UsersTable from './components/UsersTable';
-import './components/dtitle'
 import MyComp from './components/mycomp';
 import AppContext from './components/AppContext';
-import { useState, useEffect } from "react";
+import { useState, useCallback } from "react";
+import navValues from './helpers/navValues';
+import ComponentPicker from './components/componentPicker';
+
 
 function App() {
-  const [appState, setAppState] = useState();
+  const navigate = useCallback(
+    (navTo, param, pageNumber) => setNavState({current: navTo, param, pageNumber, navigate} ), 
+    []
+  );
 
-  const [selectedUser, setSelectedUser] = useState();
-
-  const setSelectedUserWrapper = (userId) => {
-    setSelectedUser(userId);
-};
+  const [navState, setNavState] = useState({current: navValues.usersTable, pageNumber:0, navigate});
 
   return (  
-      <div className="App">
-        <AppContext.Provider value = {{appState, setAppState}}>
+    <div className="App">
+        <AppContext.Provider value={navState}>
         <div className="h-15 justify-content-start p-y-2 ma-y-5">
-
           <MyComp></MyComp>
-
         </div>
 
         <div className="h-15">
-          <button type="button" class="btn btn-primary p-y-2 m-y-2">Navigation</button>
+          <button type="button" className="btn btn-primary p-y-2 m-y-2">Navigation</button>
         </div>
-        {selectedUser ? 
-        (<UserDetails userId={selectedUser}></UserDetails>) :
-        (<UsersTable selectUser={setSelectedUserWrapper}></UsersTable>) }
+
+        <ComponentPicker currentNavLocation={navState.current}></ComponentPicker>
       
       
-    </AppContext.Provider>
+      </AppContext.Provider>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 const navValues = {
-    usersTable: "UsersTable",
-    userDetails: "UserDetails"
+    usersTable: "usersTable",
+    userDetails: "userDetails",
 };
 
 export default navValues;
