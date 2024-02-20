@@ -2,13 +2,19 @@ import { useState, useEffect } from "react";
 import UserRow from "./UserRow";
 import TableHeader from "./TableHeader";
 import TablePagging from "./TablePagging";
+import AppContext from './AppContext';
+import { useContext } from 'react';
 
 const USERS_PER_PAGE = 10;
 const URL = 'https://dummyjson.com/users?limit=' + USERS_PER_PAGE + '&skip=10&select=firstName,lastName,age';
 
-const UsersTable = () => {
+const UsersTable = ({selectUser}) => {
 
     const [users, setUsers] = useState([])
+
+    const {appState, setAppState} = useContext(AppContext)
+
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -25,9 +31,9 @@ const UsersTable = () => {
     return(
     <div className="h-70 p-y-2 m-y-2">
         <table className="table">
-            <TableHeader></TableHeader>
+        <TableHeader></TableHeader>
             <tbody>
-                {users.map(UserRow)}
+                {users.map((el) => ( <UserRow user={el} selectUser={selectUser}></UserRow>))}
             </tbody>
         </table>
         <TablePagging></TablePagging>
