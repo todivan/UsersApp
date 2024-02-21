@@ -6,11 +6,10 @@ import navValues from "../helpers/navValues";
 const URL = 'https://dummyjson.com/users/';
 
 const UserDetails = () => {
-    const { param: userId } = useContext(AppContext);
-    const { navigate } = useContext(AppContext);
+    const { navigate, param: userId } = useContext(AppContext);
     const [user, setUser] = useState([])
 
-    useEffect(() => {console.log("ITTest: " + URL + userId)
+    useEffect(() => {
         const fetchData = async () => {
             const result = await fetch(URL + userId)
             result.json().then(fetchUser => {

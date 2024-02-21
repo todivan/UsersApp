@@ -1,4 +1,9 @@
+import { useContext } from "react";
+import AppContext from "./AppContext";
+
 const TablePagging = () => {
+    const { navigate, param: userId } = useContext(AppContext);
+
     return (
         <div className="row">
             <div className="h-15 col-6">

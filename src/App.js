@@ -12,7 +12,7 @@ function App() {
     []
   );
 
-  const [navState, setNavState] = useState({current: navValues.usersTable, pageNumber:0, navigate});
+  const [navState, setNavState] = useState({current: navValues.usersTable, pageNumber:1, navigate});
 
   return (  
     <div className="App">
@@ -26,7 +26,6 @@ function App() {
         </div>
 
         <ComponentPicker currentNavLocation={navState.current}></ComponentPicker>
-      
       
       </AppContext.Provider>
     </div>
