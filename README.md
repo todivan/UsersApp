@@ -1,4 +1,8 @@
-# Getting Started with Create React App
+# Demo Users App - React
+
+This is simple demo app for listing and showing users details from 'https://dummyjson.com/users'
+
+__________________________
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
