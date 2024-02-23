@@ -2,6 +2,14 @@
 
 This is simple demo app for listing and showing users details from 'https://dummyjson.com/users'
 
+In order to start application first should be executed command:
+
+### `npm install`
+
+then:
+
+### `npm start`
+
 __________________________
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
