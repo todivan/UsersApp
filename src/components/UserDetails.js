@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { AppContext} from "./AppContext";
 import navValues from "../helpers/navValues";
+import UserDetailsRow from "./UserDetailsRow.js";
 
 const URL = 'https://dummyjson.com/users/';
 
@@ -28,30 +28,19 @@ const UserDetails = () => {
     return(
         <div>
             <div className="row">
-                <div className="col-2 text-right"><b>ID: </b></div>
-                <div className="col-6">{user.id}</div>
+                <h1>User details</h1>
+                <hr/>
             </div>
-            <div className="row">
-                <div className="col-2"><b>firstName: </b></div>
-                <div className="col-6">{user.firstName}</div>
-            </div>
-            <div className="row">
-                <div className="col-2"><b>lastName: </b></div>
-                <div className="col-6">{user.lastName}</div>
-            </div>
-            <div className="row">
-                <div className="col-2"><b>gender: </b></div>
-                <div className="col-6">{user.gender}</div>
-            </div>
-            {/* <div className="row">
-                <div className="col-2"><b>address: </b></div>
-                <div className="col-6">{user.address.city}</div>
-            </div>
-            <div className="row">
-                <div className="col-2"><b>company: </b></div>
-                <div className="col-6">{user.company.name}</div>
-            </div> */}
-            <div className="row">
+            <UserDetailsRow label="Username" value={user.username} />
+            <UserDetailsRow label="ID" value={user.id} />
+            <UserDetailsRow label="First Name" value={user.firstName} />
+            <UserDetailsRow label="UserLast Namename" value={user.lastName} />
+            <UserDetailsRow label="Gender" value={user.gender} />
+            <UserDetailsRow label="Email" value={user.email} />
+            <UserDetailsRow label="Phone" value={user.phone} />
+            {/* <UserDetailsRow label="City" value={user.address.city} /> 
+            <UserDetailsRow label="Company" value={user.company.name} />*/}
+            <div className="row"> 
                 <div className="col-2">
                     <button type="button" className="btn btn-primary p-y-2 m-y-2" onClick={goBack}>Back</button>
                 </div>

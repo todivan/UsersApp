@@ -3,28 +3,33 @@ import UserRow from "./UserRow";
 import TableHeader from "./TableHeader";
 import TablePagging from "./TablePagging";
 import {PagingContext} from "./AppContext";
-
-const USERS_PER_PAGE = 10;
-
+import consts from "../helpers/consts";
 
 const UsersTable = () => {
 
-    const { pageNumber } = useContext(PagingContext);
+    const { changePage, pageNumber } = useContext(PagingContext);
     const [users, setUsers] = useState([])
 
       useEffect(() => {
-        const fetchData = async () => {
-            const skip = pageNumber ? pageNumber * USERS_PER_PAGE : 0;
-            const URL = 'https://dummyjson.com/users?limit=' + USERS_PER_PAGE + '&skip=' + skip + '&select=firstName,lastName,age';
-            const result = await fetch(URL)
-            result.json().then(fetchUser => {
-                console.log(fetchUser.users)
-                setUsers(fetchUser.users)
-            })
-        }
+        if(pageNumber === undefined){
+            setUsers([]);
+        } else {
+            const fetchData = async () => {
+                const skip = pageNumber * consts.USERS_PER_PAGE;
+                if(skip !== undefined){
+                    const URL = 'https://dummyjson.com/users?limit=' + consts.USERS_PER_PAGE + '&skip=' + skip + '&select=firstName,lastName,age';
+                    const result = await fetch(URL)
+                    result.json().then(fetchUsers => {
+                        console.log(fetchUsers)
+                        setUsers(fetchUsers.users);
+                        changePage(pageNumber, fetchUsers.total)
+                    })
+                }
+            }
 
-        fetchData();
-    }, [pageNumber])
+            fetchData();
+        }
+    }, [pageNumber, changePage])
 
     return(
     <div className="h-70 p-y-2 m-y-2">
