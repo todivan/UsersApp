@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import AppContext from "./AppContext";
+import { AppContext} from "./AppContext";
 import navValues from "../helpers/navValues";
 
 const URL = 'https://dummyjson.com/users/';

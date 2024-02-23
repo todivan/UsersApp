@@ -2,14 +2,14 @@ import { useState, useEffect, useContext } from "react";
 import UserRow from "./UserRow";
 import TableHeader from "./TableHeader";
 import TablePagging from "./TablePagging";
-import AppContext from "./AppContext";
+import {PagingContext} from "./AppContext";
 
 const USERS_PER_PAGE = 10;
 
 
 const UsersTable = () => {
 
-    const { pageNumber } = useContext(AppContext);
+    const { pageNumber } = useContext(PagingContext);
     const [users, setUsers] = useState([])
 
       useEffect(() => {
