@@ -13,7 +13,7 @@ const TablePagging = () => {
 
     function navigateNext(){
         if(pageNumber !== undefined) {
-            changePage((pageNumber + 1) * consts.USERS_PER_PAGE > totalUsersNumber ? pageNumber : pageNumber + 1);
+            changePage((pageNumber + 1) * consts.DEFAULT_USERS_PER_PAGE > totalUsersNumber ? pageNumber : pageNumber + 1);
         }
     }
 
@@ -22,7 +22,7 @@ const TablePagging = () => {
     }
 
     function nextDisabled(){
-        return (pageNumber + 1) * consts.USERS_PER_PAGE >= totalUsersNumber || pageNumber === undefined;
+        return (pageNumber + 1) * consts.DEFAULT_USERS_PER_PAGE >= totalUsersNumber || pageNumber === undefined;
     }
 
     return (

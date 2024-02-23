@@ -1,5 +1,6 @@
 const consts = {
-    USERS_PER_PAGE: 15,
+    DEFAULT_USERS_PER_PAGE: 15,
+    MAXPER_PAGE: 50,
 };
 
 export default consts;

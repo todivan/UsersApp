@@ -1,11 +1,12 @@
 import './App.css';
 import MyComp from './components/mycomp';
-import { AppContext, PagingContext } from './components/AppContext';
+import { AppContext, PagingContext, UsersPerPageContext } from './components/AppContext';
 import React, { useState, useCallback } from "react";
 import navValues from './helpers/navValues';
 import ComponentPicker from './components/componentPicker';
 import NavBar from './components/NavBar';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import consts from './helpers/consts';
 
 
 function App() {
@@ -21,19 +22,27 @@ function App() {
   );
   const [pagingState, setPagingState] = useState({pageNumber: undefined, changePage});
 
+  const changeUsersPerPage = useCallback(
+    (toUsersPerPage) => setUsersPerPageState({usersPerPage: toUsersPerPage, changeUsersPerPage} ), 
+    []
+  );
+  const [usersPerPageState, setUsersPerPageState] = useState({usersPerPage: consts.DEFAULT_USERS_PER_PAGE, changeUsersPerPage});
+
 
   return (  
     <div className="App">
       <React.StrictMode>
         <AppContext.Provider value={navState}>
           <PagingContext.Provider value={pagingState}>
-          <div className="h-15 justify-content-start p-y-2 ma-y-5">
-            <MyComp></MyComp>
-          </div>
+            <UsersPerPageContext.Provider value={usersPerPageState}>
+            <div className="h-15 justify-content-start p-y-2 ma-y-5">
+              <MyComp></MyComp>
+            </div>
 
-          <NavBar />
+            <NavBar />
 
-          <ComponentPicker currentNavLocation={navState.current}></ComponentPicker>
+            <ComponentPicker currentNavLocation={navState.current}></ComponentPicker>
+            </UsersPerPageContext.Provider>
           </PagingContext.Provider>
       </AppContext.Provider>
       </React.StrictMode>

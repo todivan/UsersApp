@@ -2,12 +2,12 @@ import { useState, useEffect, useContext } from "react";
 import UserRow from "./UserRow";
 import TableHeader from "./TableHeader";
 import TablePagging from "./TablePagging";
-import {PagingContext} from "./AppContext";
-import consts from "../helpers/consts";
+import {PagingContext, UsersPerPageContext} from "./AppContext";
 
 const UsersTable = () => {
 
-    const { changePage, pageNumber } = useContext(PagingContext);
+    const { changePage, pageNumber} = useContext(PagingContext);
+    const { usersPerPage} = useContext(UsersPerPageContext);
     const [users, setUsers] = useState([])
 
       useEffect(() => {
@@ -15,9 +15,9 @@ const UsersTable = () => {
             setUsers([]);
         } else {
             const fetchData = async () => {
-                const skip = pageNumber * consts.USERS_PER_PAGE;
+                const skip = pageNumber * usersPerPage;
                 if(skip !== undefined){
-                    const URL = 'https://dummyjson.com/users?limit=' + consts.USERS_PER_PAGE + '&skip=' + skip + '&select=firstName,lastName,age';
+                    const URL = 'https://dummyjson.com/users?limit=' + usersPerPage + '&skip=' + skip + '&select=firstName,lastName,age';
                     const result = await fetch(URL)
                     result.json().then(fetchUsers => {
                         console.log(fetchUsers)
@@ -29,7 +29,7 @@ const UsersTable = () => {
 
             fetchData();
         }
-    }, [pageNumber, changePage])
+    }, [pageNumber, changePage, usersPerPage])
 
     return(
     <div className="h-70 p-y-2 m-y-2">
